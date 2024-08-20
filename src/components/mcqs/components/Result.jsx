@@ -3,7 +3,7 @@ import React from 'react';
 import CircularProgress from '../../utils/CircularProgress';
 
 
-export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialFetchedCount, setFetchedCount, setCorrectOptions, totalQues, score, setScore }) {
+export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialFetchedCount, setFetchedCount, setCorrectOptions, setChosenOptions, totalQues, score, setScore }) {
 
   const handleRetakeTestBtn = () => {
 
@@ -14,6 +14,11 @@ export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialF
     setFetchedCount(initialFetchedCount);
     
     setCorrectOptions(prev => {
+      prev.clear();
+      return new Map();
+    });
+
+    setChosenOptions(prev => {
       prev.clear();
       return new Map();
     });
@@ -29,12 +34,19 @@ export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialF
   }
 
   return (
-    <div className="container w-[95%] max-w-xl flex flex-col items-center justify-center gap-5 p-5 mt-5 mx-auto rounded-lg bg-gray-700 text-gray-300">
-      <div className="heading text-center text-4xl font-semibold md:w-full">
+    <div className={`
+      container
+      w-[95%] max-w-xl flex flex-col items-center justify-center gap-8 border p-10 mx-auto mt-5
+      rounded-lg
+      bg-light-100 text-secondaryPurple
+    `}>
+
+      <div className="heading text-4xl font-semibold">
         Your Score
       </div>
-      <div className="score-board w-full flex justify-between items-center px-5 py-1">
-        <div className="score w-1/2 flex flex-col font-semibold">
+
+      <div className="score-board w-full flex flex-col items-center justify-between gap-5 py-1 sm:flex-row">
+        <div className="score flex flex-col font-semibold">
           <span>Total Questions: {totalQues}</span>
           <span>Correct Answers: {score.correctAnswers}</span>
           <span>Incorrect Answers: {score.incorrectAnswers}</span>
@@ -45,9 +57,10 @@ export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialF
           <CircularProgress percentage={Math.floor(score.percentage)}/>
         </div>
       </div>
+
       <div className="actions">
         <button
-          className="px-6 py-1 border rounded"
+          className="px-6 py-1 border rounded font-semibold border-orange-500 bg-primaryOrange text-white"
           onClick={handleRetakeTestBtn}
         >
           Retake Test

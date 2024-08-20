@@ -18,25 +18,31 @@ export default function InitialScreen({ setTab, numOfQuesOptions, setTotalQues }
   }
 
   return (
-    <div className="container w-[95%] max-w-xl flex flex-col items-center justify-center gap-10 p-5 mt-5 mx-auto rounded-lg bg-gray-700 text-gray-300">
-      <div className="heading text-center text-4xl font-semibold md:w-full">
+    <div className={`
+      container
+      w-[95%] max-w-xl flex flex-col items-center justify-center gap-7 border px-5 py-10 mx-auto mt-5
+      rounded-lg
+      bg-light-100 text-secondaryPurple
+      sm:px-10
+    `}>
+      <div className="heading text-center text-2xl md:text-4xl font-bold sm:text-3xl md:w-full">
         English Grammar Test
       </div>
-      <div className="img-cont w-[80%]">
+      <div className="img-cont w-[70%] max-w-[15rem] ">
         <img
-          className="size-full object-cover rounded-lg"
-          src="https://www.fluencyhive.com/wp-content/uploads/2024/07/low_quality-diXxT84RUC-1.jpg"
+          className="size-full object-cover rounded-xl"
+          src="https://www.fluencyhive.com/wp-content/uploads/2024/08/mcq-test.svg"
           alt="English Grammar Test - Reference Image"
         />
       </div>
-      <div className="actions w-[80%] flex justify-between items-center">
+      <div className="actions w-full flex flex-col gap-5 justify-evenly items-center sm:flex-row md:w-[80%]">
         <Select
           label="No. of Questions"
           options={numOfQuesOptions}
           onChange={handleNumOfQues}
         />
         <button
-          className="px-6 py-1 border rounded"
+          className="w-[90%] px-6 py-1 border rounded font-semibold border-orange-500 bg-primaryOrange text-white sm:w-fit"
           onClick={handleStartTest}
         >
           Start Test
