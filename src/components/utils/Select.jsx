@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 
 
-const ArrowDropdown = ({ className = "", size = 20, fill = "none" }) =>
+const ArrowDropdown = ({ className = "", size = 20, stroke = "", fill = "none" }) =>
   <svg
     className={`iconfinder arrow-drop-down-icon ${className}`}
-    height={size}
-    viewBox="0 0 48 48"
     width={size}
+    height={size}
+    stroke={stroke}
+    viewBox="0 0 48 48"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M14 20l10 10 10-10z"/>
@@ -52,7 +53,11 @@ const Select = ({ className, label = "", defaultValue = null, options=[], onChan
         relative inline-block
       `}
     >
-      {label && <label htmlFor="select">{label}</label>}
+      {label && 
+        <label htmlFor="select" className='font-semibold'>
+          {label}
+        </label>
+      }
       <div
         id="select"
         className={`
@@ -63,10 +68,8 @@ const Select = ({ className, label = "", defaultValue = null, options=[], onChan
         `}
         onClick={() => setShowOptions(!showOptions)}
       >
-        <div className="select-selected px-6 py-1 text-gray-300">
-          <span
-            className={`${selected === defaultValue ? "opacity-50" : ""}`}
-          >
+        <div className="select-selected px-6 py-1 rounded-md text-secondaryPurple bg-white">
+          <span>
             {selected}
           </span>
         </div>
@@ -83,8 +86,8 @@ const Select = ({ className, label = "", defaultValue = null, options=[], onChan
               className={`
                 py-1 px-6
                 cursor-pointer
-                text-black hover:bg-secondaryLight
-                ${selected === option ? 'bg-primaryLight' : ''}
+                text-secondaryPurple hover:bg-secondaryLight
+                ${selected === option ? 'bg-light-100' : ''}
               `}
               onClick={() => handleOptionClick(option)}
             >
