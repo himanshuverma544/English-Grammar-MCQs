@@ -1,0 +1,60 @@
+{
+  "mcqsDummy": {
+    "data": {
+      "candidates": [
+        {
+          "content": {
+            "parts": [
+              {
+                "text": "**MCQ 1**\n\nWhich sentence is grammatically correct?\n\n(a) Me and my friends went to the park.\n(b) My friends and I went to the park.\n(c) My friends and me went to the park.\n(d) I went to the park with my friends.\n\n**Answer: (b)**\n\n**MCQ 2**\n\nIdentify the correct form of the verb in the following sentence:\n\n\"If I ____ enough money, I would buy a new car.\"\n\n(a) have\n(b) had\n(c) will have\n(d) would have\n\n**Answer: (d)**\n\n**MCQ 3**\n\nWhich pronoun is a subject pronoun?\n\n(a) he\n(b) him\n(c) his\n(d) himself\n\n**Answer: (a)**\n\n**MCQ 4**\n\nIdentify the type of sentence:\n\n\"Wow! This ice cream is delicious!\"\n\n(a) Declarative\n(b) Interrogative\n(c) Exclamatory\n(d) Imperative\n\n**Answer: (c)**\n\n**MCQ 5**\n\nWhich word is a gerund?\n\n(a) running\n(b) run\n(c) ran\n(d) runner\n\n**Answer: (a)**"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "index": 0,
+          "safetyRatings": [
+            { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "probability": "NEGLIGIBLE" },
+            { "category": "HARM_CATEGORY_HATE_SPEECH", "probability": "NEGLIGIBLE" },
+            { "category": "HARM_CATEGORY_HARASSMENT", "probability": "NEGLIGIBLE" },
+            { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "probability": "NEGLIGIBLE" }
+          ]
+        }
+      ],
+      "usageMetadata": {
+        "promptTokenCount": 14,
+        "candidatesTokenCount": 278,
+        "totalTokenCount": 292
+      }
+    },
+    "status": 200,
+    "statusText": "",
+    "headers": {
+      "cache-control": "private",
+      "content-encoding": "gzip",
+      "content-length": "675",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Sun, 18 Aug 2024 11:30:52 GMT",
+      "server": "scaffolding on HTTPServer2",
+      "vary": "Origin, X-Origin, Referer"
+    },
+    "config": {
+      "transitional": { "silentJSONParsing": true, "forcedJSONParsing": true, "clarifyTimeoutError": false },
+      "adapter": ["xhr", "http", "fetch"],
+      "transformRequest": [null],
+      "transformResponse": [null],
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "maxBodyLength": -1,
+      "env": {},
+      "headers": { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json" },
+      "params": { "key": "AIzaSyDqNAETacaCU75lfIAznlprFjO9rUtYD5c" },
+      "method": "post",
+      "url": "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent",
+      "data": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"Generate 5 mcqs along with their correct answer on English Grammar\"}]}]}"
+    },
+    "request": {}
+  }
+}
