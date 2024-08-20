@@ -29,7 +29,8 @@ export default function Mcqs() {
 
   const [mcqs, setMcqs] = useState([]);
   const [qNum, setQNum] = useState(FIRST_QUE_NUM);
-
+  
+  const [fetching, setFetching] = useState(true);
   const [fetchedCount, setFetchedCount] = useState(INITIAL_FETCHED_COUNT);
 
   const [correctOptions, setCorrectOptions] = useState(new Map());
@@ -53,9 +54,11 @@ export default function Mcqs() {
 
       const mcqsObj = formatTextToObject(text);
       setMcqs(prev => prev.concat(mcqsObj));
+      setFetching(false);
     }
     catch (error) {
       console.error(error);
+      setFetching(false);
     }
   }
 
@@ -152,6 +155,7 @@ export default function Mcqs() {
         <Test
           setTab={setTab}
           totalQues={totalQues}
+          fetching={fetching}
           mcqs={mcqs}
           qNum={qNum}
           setQNum={setQNum}
@@ -168,6 +172,7 @@ export default function Mcqs() {
           initialFetchedCount={INITIAL_FETCHED_COUNT}
           setFetchedCount={setFetchedCount}
           setCorrectOptions={setCorrectOptions}
+          setChosenOptions={setChosenOptions}
           totalQues={totalQues}
           score={score}
           setScore={setScore}
