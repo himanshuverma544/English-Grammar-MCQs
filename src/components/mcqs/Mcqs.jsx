@@ -25,7 +25,7 @@ export default function Mcqs() {
     result: false
   });
 
-  const [totalQues, setTotalQues] = useState(5);
+  const [totalQues, setTotalQues] = useState(defaultOption);
 
   const [mcqs, setMcqs] = useState([]);
   const [qNum, setQNum] = useState(FIRST_QUE_NUM);
@@ -52,7 +52,8 @@ export default function Mcqs() {
       const { data: { mcqsDummy: response } } = await Axios.get(url);
       const { data: { candidates: [{ content: { parts: [{ text }] } }] } } = response;
 
-      const mcqsObj = formatTextToObject(text);
+      // const mcqsObj = formatTextToObject(text);
+      const mcqsObj = text;
       setMcqs(prev => prev.concat(mcqsObj));
       setFetching(false);
     }
@@ -65,6 +66,7 @@ export default function Mcqs() {
   useEffect(() => {
 
     if (tab.initialScreen) {
+      setFetching(true);
       fetchMcqs();
       setFetchedCount(prev => prev + 1);
     }
@@ -80,6 +82,7 @@ export default function Mcqs() {
         (qNum - timesToFetchQues) % NUM_QUES_TO_GENERATE === 0 &&
         fetchedCount < timesToFetchQues
       ) {
+        setFetching(true);
         fetchMcqs();
         setFetchedCount(prev => prev + 1);
       }

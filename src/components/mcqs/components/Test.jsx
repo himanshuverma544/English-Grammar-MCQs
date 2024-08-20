@@ -11,6 +11,9 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
 
   const handlePrevBtn = () => setQNum(prev => prev - 1);
 
+
+  const atLastQue = () => qNum >= mcqs.length - 1;
+
   const handleNextBtn = () => {
 
     if (!atLastQue()) {
@@ -25,10 +28,9 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
     }
   }
 
-  const atLastQue = () => qNum >= mcqs.length - 1;
-
 
   return (
+    mcqs.length > 0 &&
       <div className="container w-[95%] max-w-xl flex flex-col items-center justify-center gap-10 p-10 mt-5 mx-auto rounded-lg border bg-light-100 text-secondaryPurple">
 
         <div className="question flex flex-col gap-5">
@@ -97,6 +99,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
           <button 
             className={`
               px-6 py-1 border rounded text-sm font-semibold sm:text-base
+              ${fetching && "opacity-50"}
               ${!atLastQue() ? 
                 "border-purple-500 bg-primaryPurple text-white" :
                 "border-orange-500 bg-primaryOrange text-white"
@@ -105,7 +108,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
             onClick={handleNextBtn}
             disabled={disableNextBtn()}
           >
-            {!atLastQue() ? "Next" : "Finish"}
+            {fetching ? "Please Wait..." : (!atLastQue() ? "Next" : "Finish")}
           </button>
         </div>
       </div>
