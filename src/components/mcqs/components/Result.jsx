@@ -36,7 +36,7 @@ export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialF
   return (
     <div className={`
       container
-      w-[95%] max-w-xl flex flex-col items-center justify-center gap-8 border p-10 mx-auto mt-5
+      w-[95%] max-w-2xl h-auto min-h-[30rem] flex flex-col items-center justify-center gap-8 border p-10 mx-auto mt-5
       rounded-lg
       bg-light-100 text-secondaryPurple
     `}>

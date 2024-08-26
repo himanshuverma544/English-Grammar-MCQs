@@ -20,7 +20,7 @@ export default function InitialScreen({ setTab, numOfQuesOptions, setTotalQues }
   return (
     <div className={`
       container
-      w-[95%] max-w-xl flex flex-col items-center justify-center gap-7 border px-5 py-10 mx-auto mt-5
+      w-[95%] max-w-2xl h-auto min-h-[35rem] flex flex-col items-center justify-center gap-7 border px-5 py-10 mx-auto mt-5
       rounded-lg
       bg-light-100 text-secondaryPurple
       sm:px-10

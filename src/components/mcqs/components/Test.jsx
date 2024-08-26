@@ -31,7 +31,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
 
   return (
     mcqs.length > 0 &&
-      <div className="container w-[95%] max-w-xl flex flex-col items-center justify-center gap-10 p-10 mt-5 mx-auto rounded-lg border bg-light-100 text-secondaryPurple">
+      <div className="container w-[95%] max-w-2xl h-auto min-h-[30rem] flex flex-col items-center justify-center gap-10 p-10 mt-5 mx-auto rounded-lg border bg-light-100 text-secondaryPurple">
 
         <div className="question flex flex-col gap-5">
           <div className="the-question flex flex-col gap-3 py-2 font-semibold sm:text-xl">
@@ -108,7 +108,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
             onClick={handleNextBtn}
             disabled={disableNextBtn()}
           >
-            {fetching ? "Please Wait..." : (!atLastQue() ? "Next" : "Finish")}
+            {fetching ? "Loading…" : (!atLastQue() ? "Next" : "Finish")}
           </button>
         </div>
       </div>
