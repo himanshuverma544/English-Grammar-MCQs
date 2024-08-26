@@ -1,16 +1,28 @@
-import React from 'react';
+import { useState, useEffect } from "react";
 
 import Select from "../../utils/Select";
 
 
-export default function InitialScreen({ setTab, numOfQuesOptions, setTotalQues }) {
+const mcqsTestImage = "https://www.fluencyhive.com/wp-content/uploads/2024/08/mcq-test.svg";
 
 
-  const handleStartTest = () => setTab(prev => ({
-    ...prev,
-    initialScreen: false,
-    test: true
-  }));
+export default function InitialScreen({ setTab, fetching, numOfQuesOptions, setTotalQues }) {
+
+  const [isStartingTest, setIsStartingTest] = useState(false); 
+
+  useEffect(() => {
+
+    if (!fetching && isStartingTest) {
+      setTab(prev => ({
+        ...prev,
+        initialScreen: false,
+        test: true
+      }));
+    }
+  }, [fetching, isStartingTest, setTab]);
+
+
+  const handleStartTest = () => setIsStartingTest(true);
 
 
   const handleNumOfQues = option => {
@@ -31,7 +43,7 @@ export default function InitialScreen({ setTab, numOfQuesOptions, setTotalQues }
       <div className="img-cont w-[70%] max-w-[15rem] ">
         <img
           className="size-full object-cover rounded-xl"
-          src="https://www.fluencyhive.com/wp-content/uploads/2024/08/mcq-test.svg"
+          src={mcqsTestImage}
           alt="English Grammar Test - Reference Image"
         />
       </div>
@@ -42,10 +54,16 @@ export default function InitialScreen({ setTab, numOfQuesOptions, setTotalQues }
           onChange={handleNumOfQues}
         />
         <button
-          className="w-[90%] px-6 py-1 border rounded font-semibold border-orange-500 bg-primaryOrange text-white sm:w-fit"
+          className={`
+            w-[90%] px-6 py-1 border rounded
+            font-semibold
+            ${isStartingTest ? "opacity-50" : "opacity-100"}
+            border-orange-500 bg-primaryOrange text-white sm:w-fit
+          `}
           onClick={handleStartTest}
+          disabled={isStartingTest ? true : false}
         >
-          Start Test
+          {isStartingTest ? "Loading…" : "Start Test"}
         </button>
       </div>
     </div>
