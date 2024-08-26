@@ -46,7 +46,7 @@ export default function Result({ setTab, setMcqs, firstQueNum, setQNum, initialF
       </div>
 
       <div className="score-board w-full flex flex-col items-center justify-between gap-5 py-1 sm:flex-row">
-        <div className="score flex flex-col font-semibold">
+        <div className="score flex flex-col">
           <span>Total Questions: {totalQues}</span>
           <span>Correct Answers: {score.correctAnswers}</span>
           <span>Incorrect Answers: {score.incorrectAnswers}</span>

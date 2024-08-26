@@ -54,7 +54,7 @@ const Select = ({ className, label = "", defaultValue = null, options=[], onChan
       `}
     >
       {label && 
-        <label htmlFor="select" className='font-semibold'>
+        <label htmlFor="select">
           {label}
         </label>
       }
