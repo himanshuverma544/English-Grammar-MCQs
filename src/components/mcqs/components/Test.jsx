@@ -28,6 +28,18 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
     }
   }
 
+  const getButtonText = () => {
+
+    if (fetching) {
+      return "Loading…";
+    }
+    else if (!atLastQue()) {
+      return "Next";
+    }
+    else {
+      return "Finish";
+    }
+  }
 
   return (
     mcqs.length > 0 &&
@@ -93,7 +105,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
           </button>
 
           <div className="current-que-num-from-total order-last grow text-center px-6 py-1 text-sm font-semibold sm:order-none">
-            {`${qNum + 1} / ${totalQues}`}
+            {`${fetching ? qNum : (qNum + 1)} / ${totalQues}`}
           </div>
 
           <button 
@@ -108,7 +120,7 @@ export default function Test({ setTab, totalQues, fetching, mcqs, qNum, setQNum,
             onClick={handleNextBtn}
             disabled={disableNextBtn()}
           >
-            {fetching ? "Loading…" : (!atLastQue() ? "Next" : "Finish")}
+            {getButtonText()}
           </button>
         </div>
       </div>
