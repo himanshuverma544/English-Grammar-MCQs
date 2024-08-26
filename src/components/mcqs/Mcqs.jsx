@@ -138,8 +138,6 @@ export default function Mcqs() {
 
       const { data: { candidates: [{ content: { parts: [{ text }] } }] } } = response;
   
-      console.log(text);
-
       const mcqsArr = await correctAndParseJson(text);
       setMcqs(prev => prev.concat(mcqsArr));      
     }
