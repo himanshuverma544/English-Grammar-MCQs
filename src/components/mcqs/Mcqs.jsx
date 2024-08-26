@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import Axios from "axios";
 
@@ -6,7 +6,9 @@ import InitialScreen from './components/InitialScreen';
 import Test from './components/Test';
 import Result from './components/Result';
 
+import fetchAndStore from '../../functions/mcqs/fetchAndStore';
 import formatTextToObject from "../../functions/mcqs/formatTextToObject";
+
 
 const numOfQuesOptions = [15, 30, 50];
 const [defaultOption] = numOfQuesOptions;
@@ -44,104 +46,123 @@ export default function Mcqs() {
   });
   
 
-  const fetchMcqs = async () => {
-
-    const url = import.meta.env.VITE_MCQS_DUMMY_URL;
+  const fetchMcqs = useCallback(async () => {
 
     try {
-      const { data: { mcqsDummy: response } } = await Axios.get(url);
-      const { data: { candidates: [{ content: { parts: [{ text }] } }] } } = response;
+      const url = `${import.meta.env.VITE_GEMINI_API_URL}-remove_me_later`;
 
-      // const mcqsObj = formatTextToObject(text);
-      const mcqsObj = text;
-      setMcqs(prev => prev.concat(mcqsObj));
-      setFetching(false);
+      const response = await Axios.get(url);
+      const { data: { candidates: [{ content: { parts: [{ text }] } }] } } = response;
+  
+      const mcqsArr = formatTextToObject(text);
+      setMcqs(prev => prev.concat(mcqsArr));      
     }
     catch (error) {
-      console.error(error);
-      setFetching(false);
+
+      try {
+        const url = import.meta.env.VITE_BACKUP_MCQS_URL;
+      
+        const backupMcqs = await fetchAndStore(url);
+
+        setMcqs(prev => prev.concat(
+          backupMcqs.slice(
+            NUM_QUES_TO_GENERATE * fetchedCount,
+            NUM_QUES_TO_GENERATE * (fetchedCount + 1)
+          )
+        ));
+      }
+      catch (error) {
+        console.error(`Error in Backup API: ${error}`);
+      }
+
+      console.error(`Error in Gemini API: ${error}`);
     }
-  }
+
+    setFetchedCount(prev => prev + 1);
+    setFetching(false);
+
+  }, [fetchedCount]);
+
 
   useEffect(() => {
-
+    
     if (tab.initialScreen) {
       setFetching(true);
       fetchMcqs();
-      setFetchedCount(prev => prev + 1);
     }
   }, [tab.initialScreen]);
+  
 
   useEffect(() => {
 
-    function fetchMoreQues() {
+    function loadMoreMcqs() {
 
       const timesToFetchQues = totalQues / NUM_QUES_TO_GENERATE;
-
+      const fetchBeforeQues = 2;
+  
       if (
-        (qNum - timesToFetchQues) % NUM_QUES_TO_GENERATE === 0 &&
+        qNum > 0 &&
+        (qNum + fetchBeforeQues) % NUM_QUES_TO_GENERATE === 0 &&
         fetchedCount < timesToFetchQues
       ) {
         setFetching(true);
         fetchMcqs();
-        setFetchedCount(prev => prev + 1);
       }
     }
-    fetchMoreQues();
-
-  }, [qNum, fetchedCount, totalQues]);
-
+    loadMoreMcqs();
+    
+  }, [qNum, totalQues]);
+  
 
   useEffect(() => {
 
-    function getCorrectOptions() {
+    if (qNum === totalQues - 1) {
 
-      if (qNum === totalQues - 1) {
+      function getCorrectOptions() {
+
         for (const i in mcqs) {
           const { correct_option } = mcqs[i];
           setCorrectOptions(correctOptions.set(parseInt(i), correct_option));
         }
       }
+      getCorrectOptions();
     }
-    getCorrectOptions();
-
   }, [correctOptions, qNum , mcqs, totalQues]);
 
 
   useEffect(() => {
 
-    function calculateScore() {
-      
-      let correctAnswers = 0;
-      let incorrectAnswers = 0;
-      let unattemptedQues = 0;
-      let percentage = 0;
-
-      for (let [qNum, option] of chosenOptions) {
-
-        if(correctOptions.has(qNum) && correctOptions.get(qNum) === option) {
-          correctAnswers++;
-        }
-        else {
-          incorrectAnswers++;
-        }
-      }
-
-      unattemptedQues = correctOptions.size - chosenOptions.size;
-      percentage = (correctAnswers * 100) / correctOptions.size;
-
-      setScore({
-        percentage,
-        correctAnswers,
-        incorrectAnswers,
-        unattemptedQues
-      });
-    }
-
     if (tab.result) {
+
+      function calculateScore() {
+        
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let unattemptedQues = 0;
+        let percentage = 0;
+
+        for (let [qNum, option] of chosenOptions) {
+
+          if(correctOptions.has(qNum) && correctOptions.get(qNum) === option) {
+            correctAnswers++;
+          }
+          else {
+            incorrectAnswers++;
+          }
+        }
+
+        unattemptedQues = correctOptions.size - chosenOptions.size;
+        percentage = (correctAnswers * 100) / correctOptions.size;
+
+        setScore({
+          percentage,
+          correctAnswers,
+          incorrectAnswers,
+          unattemptedQues
+        });
+      }
       calculateScore();
     }
-
   }, [tab.result, chosenOptions, correctOptions, setScore]);
 
 
