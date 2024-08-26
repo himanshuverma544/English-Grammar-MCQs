@@ -9,4 +9,4 @@
 
 # API
 - Gemini API
-- Backup API created using npoint.io
+- Backup API created using www.npoint.io
