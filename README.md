@@ -1,6 +1,3 @@
-# Component
-- MCQ Test
-
 # Tech Stack
 - React
 
@@ -9,3 +6,7 @@
 
 # Remote Data Fetching Libraries
 - Axios
+
+# API
+- Gemini API
+- Backup API created using npoint.io
