@@ -34,7 +34,7 @@ export default function InitialScreen({ setTab, fetching, numOfQuesOptions, setT
       container
       w-[95%] max-w-2xl h-auto min-h-[35rem] flex flex-col items-center justify-center gap-7 border px-5 py-10 mx-auto mt-5
       rounded-lg
-      bg-light-100 text-secondaryPurple
+      bg-light-300 text-secondaryPurple
       sm:px-10
     `}>
       <div className="heading text-center text-2xl md:text-4xl font-bold sm:text-3xl md:w-full">

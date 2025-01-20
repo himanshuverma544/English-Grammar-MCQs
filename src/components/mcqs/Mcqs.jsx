@@ -251,7 +251,7 @@ export default function Mcqs() {
 
 
   return (
-    <>
+    <div className="h-screen flex justify-center items-center">
       {tab.initialScreen &&
         <InitialScreen
           setTab={setTab}
@@ -287,6 +287,6 @@ export default function Mcqs() {
           setScore={setScore}
         />
       }
-    </>
+    </div>
   );
 }
