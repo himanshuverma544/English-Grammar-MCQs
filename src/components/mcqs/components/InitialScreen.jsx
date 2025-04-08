@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Select from "../../utils/Select";
 
 
-const mcqsTestImage = "https://www.fluencyhive.com/wp-content/uploads/2024/08/mcq-test.svg";
+// const mcqsTestImage = "https://www.fluencyhive.com/wp-content/uploads/2024/08/mcq-test.svg";
 
 
 export default function InitialScreen({ setTab, fetching, numOfQuesOptions, setTotalQues }) {
@@ -40,13 +40,14 @@ export default function InitialScreen({ setTab, fetching, numOfQuesOptions, setT
       <div className="heading text-center text-2xl md:text-4xl font-bold sm:text-3xl md:w-full">
         English Grammar Test
       </div>
-      <div className="img-cont w-[70%] max-w-[15rem] ">
-        <img
-          className="size-full object-cover rounded-xl"
-          src={mcqsTestImage}
-          alt="English Grammar Test - Reference Image"
-        />
-      </div>
+      {/* <div className="img-cont w-[70%] max-w-[15rem]">
+            <img
+              className="size-full object-cover rounded-xl"
+              src={mcqsTestImage}
+              alt="English Grammar Test - Reference Image"
+            />
+          </div>
+      */}
       <div className="actions w-full flex flex-col gap-5 justify-evenly items-center sm:flex-row md:w-[80%]">
         <Select
           label="No. of Questions"
